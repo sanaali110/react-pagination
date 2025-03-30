@@ -18,6 +18,9 @@ button{
   color:white;
   padding:15px;
 }
+button:disabled{
+  color: grey;
+}
 .data-holder{
   background-color:black;
   padding:20px;

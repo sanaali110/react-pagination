@@ -3,13 +3,16 @@ import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Display from "./components/Display";
 
+// export const apiConfig - then import like below
+import { apiConfig, itemsPerPage } from "./utils/constants";
+
+// export default apiConfig - then use import like this
+// import apiConfig from "./utils/constants";
+// import { itemsPerPage } from "./utils/constants";
+
 function App() {
   /**Defining keys and url */
-  const API_KEY = "uGE6w6AvsFXrGdAE0UpB4oTWEzfZ05E9";
-  const weatherAPI =
-    "http://dataservice.accuweather.com/currentconditions/v1/topcities/";
-  const lang = "en-gb";
-  const maxrows = 50;
+  const {weatherAPI,maxrows,API_KEY,lang} = apiConfig
   const url = `${weatherAPI}${maxrows}?apikey=${API_KEY}&language=${lang}`;
 
   /**Defining State */
@@ -34,11 +37,12 @@ function App() {
       console.log("Fetching error", error);
     }
   };
+
   return (
     <div className="App">
       <h1>Weather for cities</h1>
-      {<Display page={page} data={data} />}
-      <Footer page={page} setPage={setPage} />
+      <Display page={page} itemsPerPage={itemsPerPage} data={data} />
+      <Footer page={page} itemsPerPage={itemsPerPage} totalNoOfItems={data.length} setPage={setPage} />
     </div>
   );
 }
